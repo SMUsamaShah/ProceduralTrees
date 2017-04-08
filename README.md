@@ -1,5 +1,5 @@
 # ProceduralTrees
-Generates pretty trees from given seed
+Generate pretty trees from given seed  
 ![Tree with Style Preset](https://smusamashah.github.io/ProceduralTrees/samples/tree1.png)
 
 Demo: https://smusamashah.github.io/ProceduralTrees/ProceduralTree.html

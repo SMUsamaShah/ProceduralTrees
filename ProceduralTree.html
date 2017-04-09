@@ -106,7 +106,7 @@
         drawBranch(params);
     };
 
-    function TreeControls(){
+    function DatTreeControls(){
         this.seed = MTH.rand(1,100000);
         MTH.rand = MTH.randomInt(this.seed);
         MTH.randf = MTH.randomFloat(this.seed);
@@ -146,6 +146,9 @@
         this.renderNew = function(){
             this.seed = MTH.rand(1,100000);
             this.render();
+            for (var i in gui.__controllers) {
+                gui.__controllers[i].updateDisplay();
+            }
         };
     };
 
@@ -203,40 +206,42 @@
         }
     });
 
-    var treeControls = new TreeControls();
-    gui.remember(treeControls);
+    function SetupDatGui(){
+        var treeControls = new DatTreeControls();
+        gui.remember(treeControls);
 
-    gui.add(treeControls, 'seed').listen();
-    
+        gui.add(treeControls, 'seed');
 
-    gui.add(treeControls, 'trunkLength');
-    gui.add(treeControls, 'angleSpread');
-    gui.add(treeControls, 'angleVar');
+        gui.add(treeControls, 'trunkLength');
+        gui.add(treeControls, 'angleSpread');
+        gui.add(treeControls, 'angleVar');
 
-    // var b = gui.addFolder('Branch');
-    var b = gui;
-    b.add(treeControls, 'branchDepthMax').step(1);
-    b.addColor(treeControls, 'branchColor');
+        // var b = gui.addFolder('Branch');
+        var b = gui;
+        b.add(treeControls, 'branchDepthMax').step(1);
+        b.addColor(treeControls, 'branchColor');
 
-    b.add(treeControls, 'branchLengthMin');
-    b.add(treeControls, 'branchLengthLast');
-    b.add(treeControls, 'branchWidthMax');
-    b.add(treeControls, 'branchRatioSides');
-    b.add(treeControls, 'branchRatioMiddle');
-    b.add(treeControls, 'branchSplitsMin').step(1);
-    b.add(treeControls, 'branchSplitsMax').step(1);
+        b.add(treeControls, 'branchLengthMin');
+        b.add(treeControls, 'branchLengthLast');
+        b.add(treeControls, 'branchWidthMax');
+        b.add(treeControls, 'branchRatioSides');
+        b.add(treeControls, 'branchRatioMiddle');
+        b.add(treeControls, 'branchSplitsMin').step(1);
+        b.add(treeControls, 'branchSplitsMax').step(1);
 
-    gui.add(treeControls, 'leafSizeMin');
-    gui.add(treeControls, 'leafSizeMax');
-    gui.add(treeControls, 'leafColorGreenDark');
-    gui.add(treeControls, 'leafColorOrange');
-    gui.add(treeControls, 'leafColorRed');
-    
-    gui.add(treeControls, 'render');
-    gui.add(treeControls, 'renderNew');
+        gui.add(treeControls, 'leafSizeMin');
+        gui.add(treeControls, 'leafSizeMax');
+        gui.add(treeControls, 'leafColorGreenDark');
+        gui.add(treeControls, 'leafColorOrange');
+        gui.add(treeControls, 'leafColorRed');
+        
+        gui.add(treeControls, 'render');
+        gui.add(treeControls, 'renderNew');
 
-    treeControls.renderNew();
-
+        // render new tree after setting up controls
+        treeControls.renderNew();
+    };
+    SetupDatGui();
 </script>
 	
 </body>

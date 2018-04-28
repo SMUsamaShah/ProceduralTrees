@@ -4,6 +4,7 @@ var ProceduralTree = function(){
 	var canvas;
 	var ctx;
 	var MTH = GE.MTH;
+	var datgui;
 
 	this.initCanvas = function (element, width, height) {
 		HEIGHT = height;
@@ -142,7 +143,7 @@ var ProceduralTree = function(){
 			draw(this);
 		};
 
-		this.renderNew = function(datgui){
+		this.renderNew = function(){
 			this.seed = MTH.rand(1,100000);
 			this.render();
 			if(datgui){
@@ -210,8 +211,6 @@ var ProceduralTree = function(){
 
 		gui.remember(treeControls);
 
-		gui.add(treeControls, 'seed');
-
 		gui.add(treeControls, 'trunkLength');
 		gui.add(treeControls, 'angleSpread');
 		gui.add(treeControls, 'angleVar');
@@ -236,12 +235,14 @@ var ProceduralTree = function(){
 		gui.add(treeControls, 'leafColorRed');
 		
 		gui.add(treeControls, 'render');
+
+		gui.add(treeControls, 'seed');
 		gui.add(treeControls, 'renderNew');
 
-		// render new tree after setting up controls
-		treeControls.renderNew(gui);
+		datgui = gui;
 	};
 
+	// expose methods
 	this.addDatGui = SetupDatGui;
 	this.create = function(){
 		return new Tree();

@@ -107,7 +107,7 @@ var ProceduralTree = function(){
 	};
 
 	function Tree(){
-		this.seed = MTH.rand(1,100000);
+		this.seed = MTH.rand(1,100000).toString();
 		MTH.rand  = MTH.randomInt(this.seed);
 		MTH.randf = MTH.randomFloat(this.seed);
 
@@ -140,11 +140,15 @@ var ProceduralTree = function(){
 			if(this.leafColorOrange) this.leafColors.push(color.orange);
 			if(this.leafColorRed) this.leafColors.push(color.red);
 
+			if(typeof this.seed === "string"){
+				this.seed = textToNumber(this.seed);
+			}
+
 			draw(this);
 		};
 
 		this.renderNew = function(){
-			this.seed = MTH.rand(1,100000);
+			this.seed = MTH.rand(1,100000).toString();
 			this.render();
 			if(datgui){
 				for (var i in datgui.__controllers) {
@@ -153,6 +157,26 @@ var ProceduralTree = function(){
 			}
 		};
 	};
+
+	function textToNumber(str) {
+		var result = -1;
+		var length = str.length;
+		// parse number if str is a number 
+		if(str !== null) {
+			if(str.length > 0) {
+				if (!isNaN(str)) {
+					result = parseInt(str);
+				}
+			}
+		}
+		// convert str to contactenated ascii values
+		if(result === -1){
+			for(var i=0; i<str.length; i++){
+				result += str.charCodeAt(i)*Math.pow(10,(length-i-1)*2);
+			}
+		}
+		return result;
+	}
 
 	function SetupDatGui(treeControls){
 		var gui = new dat.GUI({ 

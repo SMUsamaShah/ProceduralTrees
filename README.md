@@ -1,4 +1,6 @@
 # ProceduralTrees
+[![HitCount](http://hits.dwyl.io/smusamashah/ProceduralTrees.svg)](http://hits.dwyl.io/smusamashah/ProceduralTrees)
+
 Generate pretty fractal based trees from given seed  
 ![Tree with Style Preset](https://smusamashah.github.io/ProceduralTrees/samples/tree1.png)
 
